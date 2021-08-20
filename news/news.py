@@ -75,8 +75,9 @@ def main():
         c.reconfig()
         sys.exit()
     try:
-        from_ = args.time[0]
-        to = args.time[1]
+        zfill = lambda string: string.zfill(2)
+        from_ = "-".join(map(zfill, args.time[0].split("-")))
+        to = "-".join(map(zfill args.time[1].split("h")))
     except TypeError:
         from_ = to = None
     try:
