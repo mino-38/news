@@ -7,7 +7,8 @@ setup(
     description="Get news from NewsAPI",
     version="1.0.0",
     install_requires=[
-        "newsapi-python"
+        "newsapi-python",
+        "python-dotenv"
     ],
     entry_points={
         "console_scripts": [
