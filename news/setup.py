@@ -1,8 +1,10 @@
 from setuptools import setup
 
 setup(
-    name="news",
+    name="news-get",
+    package=["news", "news_auth"],
     author="minomushi",
+    description="Get news from NewsAPI",
     version="1.0.0",
     install_requires=[
         "newsapi-python"
@@ -12,5 +14,7 @@ setup(
             "news = news.news:main"
         ]
     },
-    url="https://github.com/mino-38/news"
+    url="https://github.com/mino-38/news",
+    license="MIT",
+    keywords="NewsAPI news"
 )

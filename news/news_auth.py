@@ -6,7 +6,7 @@ env_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
 if not os.path.isfile(env_file):
     #APIキーがまだ登録されてない場合の処理
     key = input("Pleas enter API key of the NewsAPI: ")
-    with open(env_file, "w") as f:
+    with open(env_file, "a") as f:
         f.write(f"NEWS_API_KEY={key}")
 load_dotenv(env_file)
 
