@@ -41,6 +41,8 @@ class config:
         """
         国と言語の再設定
         """
+        from . import news_auth
+        news_auth.reset_apikey()
         self.data["country"] = input("Please enter the country code of the country you want to set: ").lower() or self.data.get("country")
         self.data["language"] = input("Please enter up to the second character of the language you want to set: ").lower() or self.data.get("language")
         self.save()
@@ -63,22 +65,22 @@ def argument():
     parser.add_argument("-c", "--reconfig", action="store_true", help="Reset the language and country.")
     parser_search = subparsers.add_parser("search", help="It search articles.")
     parser_search.add_argument("words", default=None)
-    parser.add_argument("-t", "--time", nargs=2, metavar=("[from]", "[to]"), help="Specify the article to get by date.\nIf there is only one argument, the article will be acquired in the range from the specified date to the current date.")
+    parser_search.add_argument("-t", "--time", nargs=2, metavar=("[from]", "[to]"), help="Specify the article to get by date.\nIf there is only one argument, the article will be acquired in the range from the specified date to the current date.")
     parser.add_argument("-s", "--source", nargs=1, help="Specify the site to get the article")
     return parser.parse_args()
 
 def main():
-    news = News()
-    c = config()
     args = argument()
+    c = config()
     if args.reconfig:
         c.reconfig()
         sys.exit()
+    news = News()
     try:
         zfill = lambda string: string.zfill(2)
         from_ = "-".join(map(zfill, args.time[0].split("-")))
         to = "-".join(map(zfill, args.time[1].split("-")))
-    except TypeError:
+    except (TypeError, AttributeError):
         from_ = to = None
     try:
         words = args.words
