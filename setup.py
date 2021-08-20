@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="news-get",
-    packages=["news", "news_auth"],
+    packages=["news"],
     author="minomushi",
     description="Get news from NewsAPI",
     version="1.0.0",
