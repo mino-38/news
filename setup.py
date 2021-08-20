@@ -4,6 +4,7 @@ setup(
     name="news-get",
     package=["news", "news_auth"],
     author="minomushi",
+    description="Get news from NewsAPI",
     version="1.0.0",
     install_requires=[
         "newsapi-python"
