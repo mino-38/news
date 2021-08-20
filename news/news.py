@@ -63,7 +63,7 @@ def argument():
     parser.add_argument("-c", "--reconfig", action="store_true", help="Reset the language and country.")
     parser_search = subparsers.add_parser("search", help="It search articles.")
     parser_search.add_argument("words", default=None)
-    parser.add_argument("-t", "--time", nargs="2", metavar=("[from]", "[to]"), help="Specify the article to get by date.\nIf there is only one argument, the article will be acquired in the range from the specified date to the current date.")
+    parser.add_argument("-t", "--time", nargs=2, metavar=("[from]", "[to]"), help="Specify the article to get by date.\nIf there is only one argument, the article will be acquired in the range from the specified date to the current date.")
     parser.add_argument("-s", "--source", nargs=1, help="Specify the site to get the article")
     return parser.parse_args()
 
@@ -77,7 +77,7 @@ def main():
     try:
         zfill = lambda string: string.zfill(2)
         from_ = "-".join(map(zfill, args.time[0].split("-")))
-        to = "-".join(map(zfill args.time[1].split("h")))
+        to = "-".join(map(zfill, args.time[1].split("-")))
     except TypeError:
         from_ = to = None
     try:
