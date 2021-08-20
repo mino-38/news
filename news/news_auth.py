@@ -20,7 +20,7 @@ def auth():
 
 def reset_apikey():
     """
-    APIキーのリセット
+    APIキーの再設定
     """
     os.remove(env_file)
     init()

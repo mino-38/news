@@ -25,6 +25,13 @@ class News:
             sources = sources[0]
         return self.api.get_everything(sources=sources, q=q, from_param=from_param, to=to, page=page)
 
+    def get_all_source(self):
+        """
+        sources引数に渡せるソースを全て取得
+        """
+        for s in self.api.get_sources().get("sources"):
+            output(s, key=None)
+
 class config:
     file = os.path.join(os.path.dirname(__file__), "setting.json")
     with open(file, "r") as f:
@@ -47,17 +54,27 @@ class config:
         self.data["language"] = input("Please enter up to the second character of the language you want to set: ").lower() or self.data.get("language")
         self.save()
 
-def output(data):
+def output(data, key="articles"):
     """
     出力
     """
-    for i in data.get("articles"):
-        for key, value in i.items():
+    if key:
+        iter_data = data.get(key)
+    else:
+        iter_data = data
+    def turn(d):
+        for key, value in d.items():
             if key == "source":
-                print(f"{key}: {value.get('name')}")
+                print(f"id: {value.get('id')}\nsource: {value.get('name')}")
             else:
                 print(f"{key}: {value}")
         print()
+
+    if isinstance(iter_data, list):
+        for i in iter_data:
+            turn(i)
+    else:
+        turn(iter_data)
 
 def argument():
     parser = argparse.ArgumentParser(argument_default=None, description="Get news.")
@@ -66,7 +83,8 @@ def argument():
     parser_search = subparsers.add_parser("search", help="It search articles.")
     parser_search.add_argument("words", default=None)
     parser_search.add_argument("-t", "--time", nargs=2, metavar=("[from]", "[to]"), help="Specify the article to get by date.\nIf there is only one argument, the article will be acquired in the range from the specified date to the current date.")
-    parser.add_argument("-s", "--source", nargs=1, help="Specify the site to get the article")
+    parser.add_argument("-s", "--source", nargs=1, help="Specify the site to get the article.")
+    parser.add_argument("-a", "--all-source", action="store_true", help="Get all source data.")
     return parser.parse_args()
 
 def main():
@@ -76,6 +94,9 @@ def main():
         c.reconfig()
         sys.exit()
     news = News()
+    if args.all_source:
+        news.get_all_source()
+        sys.exit()
     try:
         zfill = lambda string: string.zfill(2)
         from_ = "-".join(map(zfill, args.time[0].split("-")))
