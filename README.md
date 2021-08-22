@@ -23,7 +23,7 @@ $ news -c
 
 # オプション
 
--s, --source  
+## -s, --source  
 取得するニュースサイトを指定します  
 指定出来るサイトは-a, --all-sourceオプションで確認できます
 
@@ -33,7 +33,7 @@ $ news -s bbc-news
 # >>> BBC NEWSのトップニュースを取得
 ```
 
--a, --all-source  
+## -a, --all-source  
 -s, --sourceオプションで指定できるソースを全て表示します
 -s, --sourceオプションには"id"の値を渡してください
 
@@ -48,7 +48,7 @@ etc...
 $ news -s hoge
 ```
 
--c, --reconfig  
+## -c, --reconfig  
 APIキーと国、言語の再設定をします
 
 # サブコマンド
@@ -57,7 +57,7 @@ search [検索ワード]
 
 # searchコマンドのオプション
 
--t, --time from to  
+## -t, --time from to  
 期間を指定して記事を取得します
 
 例:
