@@ -1,10 +1,9 @@
 from newsapi import NewsApiClient
 from dotenv import load_dotenv
 import os
+import sys
 
 def init():
-    global env_file
-    env_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
     if not os.path.isfile(env_file):
         #APIキーがまだ登録されてない場合の処理
         key = input("Pleas enter API key of the NewsAPI: ")
@@ -25,5 +24,7 @@ def reset_apikey():
     try:
         os.remove(env_file)
     except FileNotFoundError:
-        print("Before using this program, you need to get the API key of NewsAPI(https://newsapi.org/)\nHave you got it yet?", end=sys.stderr)
+        print("Before using this program, you need to get the API key of NewsAPI(https://newsapi.org/)\nHave you got it yet?", file=sys.stderr)
     init()
+
+env_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
