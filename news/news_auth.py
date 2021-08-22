@@ -24,7 +24,7 @@ def reset_apikey():
     try:
         os.remove(env_file)
     except FileNotFoundError:
-        print("Before using this program, you need to get the API key of NewsAPI(https://newsapi.org/)\nHave you got it yet?", file=sys.stderr)
+        print("Before using this program, you need to get the API key of NewsAPI(https://newsapi.org/)\nHave you got it yet?\n", file=sys.stderr)
     init()
 
-env_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
+env_file = os.path.join(os.path.dirname(__file__), ".env")

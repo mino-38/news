@@ -6,6 +6,10 @@ setup(
     author="minomushi",
     description="Get news from NewsAPI",
     version="1.0.0",
+    package_data={
+        "news": "*.json",
+        "": "README.md"
+    },
     install_requires=[
         "newsapi-python",
         "python-dotenv"
