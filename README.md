@@ -1,6 +1,3 @@
-# news
-NewsAPIからニュースを取得します
-
 # 使用する前に
 [NewsAPIのAPIキーを取得してください](https://newsapi.org/)
 
