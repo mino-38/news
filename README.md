@@ -5,7 +5,7 @@
 ```bash
 $ git clone https://github.com/mino-38/news.git
 $ cd news
-$ pip install -e .
+$ pip install .
 ```
 
 # 使い方
