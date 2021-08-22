@@ -22,7 +22,8 @@ def reset_apikey():
     """
     APIキーの再設定
     """
-    os.remove(env_file)
+    try:
+        os.remove(env_file)
+    except FileNotFoundError:
+        print("Before using this program, you need to get the API key of NewsAPI(https://newsapi.org/)\nHave you got it yet?", end=sys.stderr)
     init()
-
-init()

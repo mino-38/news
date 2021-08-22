@@ -6,6 +6,7 @@ import datetime as dt
 
 class News:
     from . import news_auth
+    news_auth.init()
     api = news_auth.auth() #NewsApiClientのインスタンス
     
     def get_top_news(self, sources=None, q=None, language="en", country="us"):
