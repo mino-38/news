@@ -9,14 +9,14 @@ class News:
         news_auth.init()
         self.api = news_auth.auth() #NewsApiClientのインスタンス
     
-    def get_top_news(self, sources=None, q=None, language="en", country="us"):
+    def get_top_news(self, sources=None, language="en", country="us"):
         """
         トップニュースを取得
         """
         if sources:
             country = language = None
             sources = sources[0]
-        return self.api.get_top_headlines(sources=sources, q=q, language=language, country=country)
+        return self.api.get_top_headlines(sources=sources, language=language, country=country)
 
     def get_news(self, sources=None, q=None, from_param=None, to=None, page=1):
         """
@@ -111,7 +111,7 @@ def main():
     if words:
         data = news.get_news(args.source, words, from_, to)
     else:
-        data = news.get_top_news(args.source, words, c.data.get("language"), c.data.get("country"))
+        data = news.get_top_news(args.source, c.data.get("language"), c.data.get("country"))
     output(data)
 
 if __name__ == "__main__":
