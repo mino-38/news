@@ -3,9 +3,7 @@
 
 # インストール
 ```bash
-$ git clone https://github.com/mino-38/news.git
-$ cd news
-$ pip install .
+$ pip install git+https://github.com/mino-38/news.git
 ```
 
 # 使い方
