@@ -7,8 +7,8 @@ setup(
     description="Get news from NewsAPI",
     version="1.0.0",
     package_data={
-        "news": "*.json",
-        "": "*.md"
+        "news": ["*.json"],
+        "": ["*.md"]
     },
     install_requires=[
         "newsapi-python",
