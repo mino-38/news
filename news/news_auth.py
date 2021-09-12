@@ -6,9 +6,11 @@ import sys
 def init():
     if not os.path.isfile(env_file):
         #APIキーがまだ登録されてない場合の処理
-        key = input("Pleas enter API key of the NewsAPI: ")
-        with open(env_file, "a") as f:
-            f.write(f"NEWS_API_KEY={key}")
+        import getpass
+        key = getpass.getpass(prompt="Pleas enter API key of the NewsAPI: ")
+        if key:
+            with open(env_file, "w") as f:
+                f.write(f"NEWS_API_KEY={key}")
     load_dotenv(env_file)
 
 def auth():
