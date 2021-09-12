@@ -10,7 +10,7 @@ $ pip install git+https://github.com/mino-38/news.git
 まず最初に初期設定をして下さい
 ```bash
 $ news -c
-# Pleas enter API key of the NewsAPI: 取得したAPIキーを入力  
+# Pleas enter API key of the NewsAPI: 取得したAPIキーを入力(セキュリティ対策のため出力はされません)  
 # Please enter the country code of the country you want to set: 設定したい国の国コードを入力(jpは使用できなかったためusを推奨)  
 # Please enter up to the second character of the language you want to set: 設定したい言語を英語で2文字目まで入力(jaは使用できなかったためenを推奨)
 ```
