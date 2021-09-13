@@ -53,8 +53,8 @@ class config:
         国と言語の再設定
         """
         news_auth.reset_apikey()
-        self.country = input("Please enter the country code of the country you want to set: ").lower() or self.country
-        self.language = input("Please enter up to the second character of the language you want to set: ").lower() or self.language
+        self.country = input("Please enter the country code of the country you want to set: ").lower() or self.country or "us"
+        self.language = input("Please enter up to the second character of the language you want to set: ").lower() or self.language or "en"
         self.save()
 
 def output(data, key="articles"):
