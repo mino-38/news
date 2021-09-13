@@ -3,14 +3,9 @@ from dotenv import load_dotenv
 import os
 import sys
 
-def init():
-    if not os.path.isfile(env_file):
-        #APIキーがまだ登録されてない場合の処理
-        import getpass
-        key = getpass.getpass(prompt="Pleas enter API key of the NewsAPI: ")
-        if key:
-            with open(env_file, "w") as f:
-                f.write(f"NEWS_API_KEY={key}")
+def init(set_apikey=True):
+    if set_apikey and not os.path.isfile(env_file):
+        reset_apikey()
     load_dotenv(env_file)
 
 def auth():
@@ -23,10 +18,12 @@ def reset_apikey():
     """
     APIキーの再設定
     """
-    try:
-        os.remove(env_file)
-    except FileNotFoundError:
+    import getpass
+    if not os.path.isfile(env_file):
         print("Before using this program, you need to get the API key of NewsAPI(https://newsapi.org/)\nHave you got it yet?\n", file=sys.stderr)
-    init()
+    key = getpass.getpass(prompt="Please enter API key of the NewsAPI: ")
+    if key:
+        with open(env_file, "w") as f:
+            f.write(f"NEWS_API_KEY={key}\n")
 
-env_file = os.path.join(os.path.dirname(__file__), ".env")
+env_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")

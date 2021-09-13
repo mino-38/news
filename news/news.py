@@ -1,3 +1,4 @@
+from . import news_auth
 import argparse
 import sys
 import json
@@ -5,8 +6,6 @@ import os
 
 class News:
     def __init__(self):
-        from . import news_auth
-        news_auth.init()
         self.api = news_auth.auth() #NewsApiClientのインスタンス
     
     def get_top_news(self, sources=None, language="en", country="us"):
@@ -34,25 +33,28 @@ class News:
             output(s, key=None)
 
 class config:
-    file = os.path.join(os.path.dirname(__file__), "setting.json")
-    with open(file, "r") as f:
-        data = json.load(f)
+    def __init__(self):
+        news_auth.init(set_apikey=False)
+        self.country = os.environ.get("NEWS_COUNTRY")
+        self.language = os.environ.get("NEWS_LANGUAGE")
+        self.file = news_auth.env_file
 
     def save(self):
         """
         変更を保存
         """
-        with open(self.file, "w") as f:
-            json.dump(self.data, f)
+        with open(self.file, "r") as r:
+            key = r.readline().strip()
+        with open(self.file, "w") as w:
+            w.write(f"{key}\nNEWS_LANGUAGE={self.language}\nNEWS_COUNTRY={self.country}")
 
     def reconfig(self):
         """
         国と言語の再設定
         """
-        from . import news_auth
         news_auth.reset_apikey()
-        self.data["country"] = input("Please enter the country code of the country you want to set: ").lower() or self.data.get("country")
-        self.data["language"] = input("Please enter up to the second character of the language you want to set: ").lower() or self.data.get("language")
+        self.country = input("Please enter the country code of the country you want to set: ").lower() or self.country
+        self.language = input("Please enter up to the second character of the language you want to set: ").lower() or self.language
         self.save()
 
 def output(data, key="articles"):
@@ -111,7 +113,7 @@ def main():
     if words:
         data = news.get_news(args.source, words, from_, to)
     else:
-        data = news.get_top_news(args.source, c.data.get("language"), c.data.get("country"))
+        data = news.get_top_news(args.source, c.language, c.country)
     output(data)
 
 if __name__ == "__main__":
